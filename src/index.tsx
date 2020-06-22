@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, Fragment } from 'react';
 import ReactDOM from 'react-dom';
 
 type FormElement = React.FormEvent<HTMLFormElement>;
@@ -23,6 +23,12 @@ export default function App(): JSX.Element {
     setTodos(newTodos);
   };
 
+  const completeTodo = (index: number): void => {
+    const newTodos: ITodo[] = [...todos];
+    newTodos[index].complete = !newTodos[index].complete;
+    setTodos(newTodos);
+  };
+
   return (
     <>
       <h1>Hi There</h1>
@@ -31,8 +37,13 @@ export default function App(): JSX.Element {
         <button type="submit">Add Todo</button>
       </form>
       <section>
-        {todos.map(({ text }: ITodo, i: number) => (
-          <div key={i}>{text}</div>
+        {todos.map(({ text, complete }: ITodo, i: number) => (
+          <Fragment key={i}>
+            <div>{text}</div>
+            <button type="button" onClick={() => completeTodo(i)}>
+              {complete ? 'Incomplete' : 'Complete'}
+            </button>
+          </Fragment>
         ))}
       </section>
     </>
