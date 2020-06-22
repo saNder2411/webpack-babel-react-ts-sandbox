@@ -7,7 +7,7 @@ const rules = [
   },
 ];
 
-module.export = {
+module.exports = {
   target: 'web',
   mode: 'development',
   entry: './src/index.tsx',
