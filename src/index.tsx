@@ -29,6 +29,12 @@ export default function App(): JSX.Element {
     setTodos(newTodos);
   };
 
+  const removeTodo = (index: number): void => {
+    const newTodos: ITodo[] = [...todos];
+    newTodos.splice(index, 1);
+    setTodos(newTodos);
+  };
+
   return (
     <>
       <h1>Hi There</h1>
@@ -39,9 +45,13 @@ export default function App(): JSX.Element {
       <section>
         {todos.map(({ text, complete }: ITodo, i: number) => (
           <Fragment key={i}>
-            <div style={{ textDecoration: complete ? 'line-through' : '' }}>{text}</div>
+            <p style={{ textDecoration: complete ? 'line-through' : '' }}>{text}</p>
             <button type="button" onClick={() => completeTodo(i)}>
+              {' '}
               {complete ? 'Incomplete' : 'Complete'}
+            </button>
+            <button type="button" onClick={() => removeTodo(i)}>
+              &times;
             </button>
           </Fragment>
         ))}
